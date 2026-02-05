@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anish ❤️ Priyanka | 23 Years of Love</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI, sans-serif}
+body{background:linear-gradient(135deg,#ffdde1,#ee9ca7);overflow-x:hidden}
+
+.container{display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
+.card{background:white;max-width:430px;width:100%;border-radius:20px;box-shadow:0 20px 50px rgba(0,0,0,.25);text-align:center;overflow:hidden}
+.header{background:#ff4d6d;color:white;padding:28px}
+.header h1{font-size:1.7rem}
+.header p{opacity:.9;margin-top:6px}
+
+.photos{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:15px}
+.photos img{width:100%;height:160px;object-fit:cover;border-radius:12px}
+
+.message{padding:22px;line-height:1.7;font-size:.98rem}
+button{background:#ff4d6d;border:none;color:white;padding:12px 18px;border-radius:25px;font-size:1rem;cursor:pointer;margin-top:12px}
+#secretMsg{display:none;margin-top:15px;color:#ff4d6d;font-weight:bold}
+.footer{background:#fafafa;padding:15px;font-size:.9rem}
+
+#intro{position:fixed;top:0;left:0;width:100%;height:100%;background:black;display:flex;justify-content:center;align-items:center;color:white;flex-direction:column;z-index:9999;text-align:center;padding:20px}
+#intro h1{font-size:2.1rem;margin-bottom:20px}
+
+.counter{font-size:1.2rem;color:#ff4d6d;margin-top:12px;font-weight:bold}
+</style>
+</head>
+
+<body>
+
+<!-- CINEMATIC INTRO -->
+<div id="intro">
+<h1>✨ A Love Story Since 2003 ✨<br>Anish ❤️ Priyanka</h1>
+<p style="opacity:.8">Tap to open surprise</p>
+</div>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+<source src="newMusic.mpeg" type="audio/mpeg">
+</audio>
+
+<div class="container">
+<div class="card">
+
+<div class="header">
+<h1>Happy 23rd Anniversary ❤️</h1>
+<p>Anish & Priyanka</p>
+</div>
+
+<div class="photos">
+<img src="image1.jpeg">
+<img src="image2.jpeg">
+<img src="image3.jpeg">
+<img src="image4.jpeg">
+<img src="image5.jpeg">
+<img src="image2.jpeg">
+</div>
+
+<div class="message">
+23 beautiful years of togetherness 💖<br>
+Your love, care and sacrifices built our family.<br>
+You both are my biggest blessing in life.<br>
+I am proud to be your child ❤️
+
+<div class="counter" id="loveCounter"></div>
+
+<button onclick="showMessage()">💌 Tap for Special Message</button>
+<div id="secretMsg">
+Dear Mom & Dad ❤️<br>
+Thank you for giving me the best life,
+endless love and support.<br>
+Your bond is my biggest inspiration.<br>
+May your love grow forever 💕<br><br>
+— Your son Lakshya
+</div>
+</div>
+
+<div class="footer">Made with ❤️ by Lakshya</div>
+</div>
+</div>
+
+<!-- FULLSCREEN SLIDESHOW -->
+<div id="slideshow" style="position:fixed;top:0;left	job:0;width:100%;height:100%;background:black;display:flex;justify-content:center;align-items:center;z-index:9998;">
+<img id="slideImg" src="image1.jpeg" style="width:100%;height:100%;object-fit:cover;">
+</div>
+
+<script>
+// intro tap
+document.getElementById("intro").addEventListener("click",()=>{
+ document.getElementById("intro").style.display="none";
+ document.getElementById("bgMusic").play();
+});
+
+// reveal
+function showMessage(){
+ document.getElementById("secretMsg").style.display="block";
+ confettiBlast();
+}
+
+// love counter
+const startYear=2003;
+const now=new Date().getFullYear();
+document.getElementById("loveCounter").innerHTML=(now-startYear)+" Years of Togetherness ❤️";
+
+// floating hearts
+function createHeart(){
+ const heart=document.createElement("div");
+ heart.innerHTML="❤";
+ heart.style.position="fixed";
+ heart.style.left=Math.random()*100+"vw";
+ heart.style.bottom="-20px";
+ heart.style.fontSize=(Math.random()*20+20)+"px";
+ heart.style.color="#ff4d6d";
+ heart.style.opacity=Math.random();
+ heart.style.zIndex="999";
+ document.body.appendChild(heart);
+ let rise=setInterval(()=>{
+  heart.style.bottom=(parseInt(heart.style.bottom)+2)+"px";
+  if(parseInt(heart.style.bottom)>window.innerHeight){heart.remove();clearInterval(rise)}
+ },30);
+}
+setInterval(createHeart,400);
+
+// slideshow
+const images=["image1.jpeg","image2.jpeg","image3.jpeg","image4.jpeg","image5.jpeg"];
+let index=0;
+const slide=document.getElementById("slideImg");
+setInterval(()=>{index=(index+1)%images.length;slide.src=images[index]},2000);
+document.getElementById("slideshow").addEventListener("click",()=>{document.getElementById("slideshow").style.display="none"});
+
+// confetti
+function confettiBlast(){
+ for(let i=0;i<80;i++){
+  const c=document.createElement("div");
+  c.style.position="fixed";c.style.width="8px";c.style.height="8px";
+  c.style.background="hsl("+Math.random()*360+",100%,50%)";
+  c.style.top="50%";c.style.left="50%";c.style.zIndex="9999";
+  document.body.appendChild(c);
+  const x=(Math.random()-.5)*600;const y=(Math.random()-.5)*600;
+  c.animate([{transform:"translate(0,0)",opacity:1},{transform:`translate(${x}px,${y}px)`,opacity:0}],{duration:1500});
+  setTimeout(()=>c.remove(),1500);
+ }
+}
+</script>
+
+</body>
+</html>
